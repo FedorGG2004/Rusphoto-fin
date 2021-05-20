@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/textResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/action_btn"
+        android:layout_marginTop="29dp"
+        android:text="Результат:" />
+
+    <Button
+        android:id="@+id/action_btn"
+        android:layout_width="170dp"
+        android:layout_height="36dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="17dp"
+        android:background="#008577"
+        android:text="Выберите изображение"
+        android:textColor="@color/white" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="185dp"
+        android:layout_height="35dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="216dp"
+        android:layout_marginTop="18dp"
+        android:background="#008577"
+        android:text="проверить"
+        android:textColor="@color/white" />
+
+
+</RelativeLayout>
