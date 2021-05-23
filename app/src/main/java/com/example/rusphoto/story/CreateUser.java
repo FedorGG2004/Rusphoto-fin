@@ -6,24 +6,24 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import com.example.rusphoto.MainActivity;
 import com.example.rusphoto.databinding.CreateUserBinding;
 import com.example.rusphoto.fragments.StoryFragment;
 
 public class CreateUser extends AppCompatActivity {
-    private static final String TAG = "CreateUser";
     CreateUserBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = CreateUserBinding.inflate(getLayoutInflater());
 
-        AppDatabase db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "production")
+        AppDatabase db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "production3")
                 .allowMainThreadQueries()
                 .build();
         binding.button.setOnClickListener(v -> {
-                User user = new User(binding.firstName.getText().toString(), binding.lastName.getText().toString(), binding.email.getText().toString());
+                User user = new User(binding.firstName.getText().toString());
                 db.userDao().insertAll(user);
-                startActivity(new Intent(CreateUser.this, StoryFragment.class));
+                startActivity(new Intent(CreateUser.this, MainActivity.class));
             });
 
         setContentView(binding.getRoot());
