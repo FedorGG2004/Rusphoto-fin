@@ -14,8 +14,6 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.rusphoto.fragments.HomeFragment;
 import com.example.rusphoto.fragments.StoryFragment;
 import com.example.rusphoto.fragments.CameraFragment;
-
-import com.example.rusphoto.tesseract.Tesseract;
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 

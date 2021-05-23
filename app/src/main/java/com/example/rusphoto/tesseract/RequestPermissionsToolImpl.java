@@ -23,7 +23,6 @@ import java.util.Map;
 public class RequestPermissionsToolImpl implements RequestPermissionsTool {
 
     private static final String CONFIRMATION_DIALOG = "ConfirmationDialog";
-    private static final String TAG = RequestPermissionsToolImpl.class.getSimpleName();
     private Activity activity;
 
 
