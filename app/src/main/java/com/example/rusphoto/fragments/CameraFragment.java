@@ -8,7 +8,6 @@ import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Camera;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,7 +15,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
-import androidx.room.Database;
 
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -24,16 +22,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.rusphoto.BuildConfig;
-import com.example.rusphoto.MainActivity;
-import com.example.rusphoto.R;
+
 import com.example.rusphoto.Speller;
 import com.example.rusphoto.databinding.CameraFragmentBinding;
-import com.example.rusphoto.story.CreateUser;
 import com.example.rusphoto.tesseract.RequestPermissionsTool;
 
 import com.example.rusphoto.tesseract.RequestPermissionsToolImpl;
@@ -41,7 +35,6 @@ import com.googlecode.tesseract.android.TessBaseAPI;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;

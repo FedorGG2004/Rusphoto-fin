@@ -14,11 +14,12 @@
         android:layout_gravity="center"
         />
 
-    <Button
+    <ImageButton
+        android:background="@color/white"
+        android:src="@drawable/ic_baseline_delete_24"
         android:id="@+id/button_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="удалить" />
+        android:layout_gravity="center" />
 
 </LinearLayout>
