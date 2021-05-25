@@ -2,10 +2,8 @@ package com.example.rusphoto.fragments;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -51,7 +49,7 @@ public class CameraFragment extends Fragment {
     Uri outputFileUri;
 
     String result = "empty";
-    private RequestPermissionsTool requestTool; //for API >=23 only
+    private RequestPermissionsTool requestTool;
 
     private static final String DATA_PATH = Environment.getExternalStorageDirectory().toString() + "/TesseractSample/";
     private static final String TESSDATA = "tessdata";
@@ -86,7 +84,6 @@ public class CameraFragment extends Fragment {
             outputFileUri = FileProvider.getUriForFile(getActivity(),
                     BuildConfig.APPLICATION_ID + ".provider", new File(img_path));
             System.out.println(outputFileUri);
-            //outputFileUri = "content://com.example.rusphoto.provider/file_paths/TesseractSample/imgs/ocr.jpg"
 
             final Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
@@ -99,33 +96,21 @@ public class CameraFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode,
                                  Intent data) {
-        System.out.println("camera starts");
-        //making photo
         super.onActivityResult(requestCode, resultCode, data);
         if ((requestCode == PHOTO_REQUEST_CODE && resultCode == Activity.RESULT_OK)){
-            System.out.println("условие пройдено");
             doOCR();
         }
         else{
-            System.out.println("Чё то не так");
+            System.out.println("error_request");
         }
     }
 
     private void doOCR() {
-        System.out.println("Do OCR");
-        System.out.println(outputFileUri);
         prepareTesseract();
-        startOCR(outputFileUri);
+        startOCR();
     }
 
-    /**
-     * Prepare directory on external storage
-     *
-     * @param path
-     * @throws Exception
-     */
     private void prepareDirectory(String path) {
-
         File dir = new File(path);
         if (!dir.exists()) {
             if (!dir.mkdirs()) {
@@ -147,22 +132,12 @@ public class CameraFragment extends Fragment {
         copyTessDataFiles(TESSDATA);
     }
 
-
-    /**
-     * Copy tessdata files (located on assets/tessdata) to destination directory
-     *
-     * @param path - name of directory with .traineddata files
-     */
-
-
     private void copyTessDataFiles(String path) {
         try {
             String[] fileList = getResources().getAssets().list(path);
 
             for (String fileName : fileList) {
 
-                // open file within the assets folder
-                // if it is not already there copy it to the sdcard
                 String pathToDataFile = DATA_PATH + path + "/" + fileName;
                 if (!(new File(pathToDataFile)).exists()) {
 
@@ -170,7 +145,6 @@ public class CameraFragment extends Fragment {
 
                     OutputStream out = new FileOutputStream(pathToDataFile);
 
-                    // Transfer bytes from in to out
                     byte[] buf = new byte[1024];
                     int len;
 
@@ -179,8 +153,6 @@ public class CameraFragment extends Fragment {
                     }
                     in.close();
                     out.close();
-
-                    Log.d(TAG, "Copied " + fileName + "to tessdata");
                 }
             }
         } catch (IOException e) {
@@ -189,17 +161,11 @@ public class CameraFragment extends Fragment {
     }
 
 
-    /**
-     * don't run this code in main thread - it stops UI thread. Create AsyncTask instead.
-     * http://developer.android.com/intl/ru/reference/android/os/AsyncTask.html
-     *
-     * @param imgUri
-     */
-    private void startOCR(Uri imgUri) {
-        System.out.println("Starts OCRRRRRRRRRRRRRR");
+    private void startOCR() {
+
         try {
             BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inSampleSize = 4; // 1 - means max size. 4 - means maxsize/4 size. Don't use value <4, because you need more memory in the heap to store your data.
+            options.inSampleSize = 4;
             Bitmap bitmap = BitmapFactory.decodeFile(DATA_PATH + "imgs" + "/ocr.jpg", options);
             result = extractText(bitmap);
 
@@ -223,8 +189,6 @@ public class CameraFragment extends Fragment {
 
         tessBaseApi.init(DATA_PATH, "rus");
 
-
-        Log.d(TAG, "Training file loaded");
         tessBaseApi.setImage(bitmap);
         String extractedText = "empty result";
         try {

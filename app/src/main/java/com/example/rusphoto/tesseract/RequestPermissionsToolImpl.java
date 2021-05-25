@@ -76,9 +76,6 @@ public class RequestPermissionsToolImpl implements RequestPermissionsTool {
     }
 
 
-    /**
-     * Shows OK/Cancel confirmation dialog about permission.
-     */
     public static class ConfirmationDialog extends DialogFragment {
 
         private static final String ARG_PERMISSION = "permission";
@@ -98,22 +95,11 @@ public class RequestPermissionsToolImpl implements RequestPermissionsTool {
 
             return new AlertDialog.Builder(getActivity())
                     .setMessage("Please allow permission")
-                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                            ActivityCompat.requestPermissions(getActivity(),
-                                    new String[]{getArguments().getString(ARG_PERMISSION)},
-                                    getArguments().getInt(ARG_REQUEST_CODE));
-                        }
-                    })
+                    .setPositiveButton(android.R.string.ok, (dialog, which) -> ActivityCompat.requestPermissions(getActivity(),
+                            new String[]{getArguments().getString(ARG_PERMISSION)},
+                            getArguments().getInt(ARG_REQUEST_CODE)))
                     .setNegativeButton(android.R.string.cancel,
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    Toast.makeText(getActivity(), "Not available", Toast.LENGTH_SHORT).show();
-                                }
-                            })
+                            (dialog, which) -> Toast.makeText(getActivity(), "Not available", Toast.LENGTH_SHORT).show())
                     .create();
         }
     }
@@ -131,20 +117,6 @@ public class RequestPermissionsToolImpl implements RequestPermissionsTool {
             args.putString(ARG_MESSAGE, message);
             dialog.setArguments(args);
             return dialog;
-        }
-
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            final Activity activity = getActivity();
-            return new AlertDialog.Builder(activity)
-                    .setMessage(getArguments().getString(ARG_MESSAGE))
-                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-//nothing
-                        }
-                    })
-                    .create();
         }
 
     }

@@ -49,9 +49,6 @@ public class Speller extends AppCompatActivity {
                                 .build();
                         User user = new User(temp);
                         db.userDao().insertAll(user);
-                        Log.d("tag", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-                        Log.d("tag", temp);
-                        Log.d("tag", user.getName());
                     }
                 } catch (InterruptedException | ExecutionException | JSONException e) {
                     System.out.println(e);

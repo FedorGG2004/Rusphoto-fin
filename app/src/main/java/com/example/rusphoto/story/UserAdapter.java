@@ -20,10 +20,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         this.deleteTextListener = deleteTextListener;
     }
 
-    public UserAdapter(List<User> texts) {
-        this.users = texts;
-    }
-
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         UserRowBinding binding = UserRowBinding.inflate(LayoutInflater.from
