@@ -58,7 +58,7 @@ public class Speller extends AppCompatActivity {
             });
         }
         else{
-            Log.d("tag", "No connection");
+            FancyToast.makeText(Speller.this, "Error connection", Toast.LENGTH_SHORT, FancyToast.ERROR, false).show();
         }
         binding.buttonret.setOnClickListener(v -> {
             AppDatabase db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "production3")
