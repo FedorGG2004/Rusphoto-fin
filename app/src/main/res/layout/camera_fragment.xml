@@ -23,7 +23,7 @@
         android:layout_marginStart="9dp"
         android:layout_marginTop="17dp"
         android:background="#008577"
-        android:text="Выберите изображение"
+        android:text="Сфотографировать"
         android:textColor="@color/white" />
 
     <Button
@@ -35,7 +35,7 @@
         android:layout_marginStart="216dp"
         android:layout_marginTop="18dp"
         android:background="#008577"
-        android:text="Проверить"
+        android:text="Проверить коррекцию"
         android:textColor="@color/white" />
 
 
